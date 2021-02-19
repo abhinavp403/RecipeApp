@@ -2,7 +2,7 @@ package com.dev.abhinav.recipeapp.network.model
 
 import com.google.gson.annotations.SerializedName
 
-class RecipeNetworkEntity(
+data class RecipeDTO(
 
     @SerializedName("pk")
     var pk: Int? = null,
