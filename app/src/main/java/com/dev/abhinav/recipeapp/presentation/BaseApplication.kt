@@ -1,4 +1,4 @@
-package com.dev.abhinav.recipeapp
+package com.dev.abhinav.recipeapp.presentation
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

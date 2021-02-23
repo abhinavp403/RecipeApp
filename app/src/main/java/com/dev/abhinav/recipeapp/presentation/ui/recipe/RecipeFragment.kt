@@ -1,4 +1,4 @@
-package com.dev.abhinav.recipeapp
+package com.dev.abhinav.recipeapp.presentation.ui.recipe
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecipeFragment: Fragment() {
 
     override fun <I : Any?, O : Any?> prepareCall(contract: ActivityResultContract<I, O>, callback: ActivityResultCallback<O>): ActivityResultLauncher<I> {

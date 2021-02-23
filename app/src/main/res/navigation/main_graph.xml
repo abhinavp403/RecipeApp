@@ -5,7 +5,7 @@
     app:startDestination="@id/recipeListFragment">
     <fragment
         android:id="@+id/recipeListFragment"
-        android:name="com.dev.abhinav.recipeapp.RecipeListFragment"
+        android:name="com.dev.abhinav.recipeapp.presentation.ui.recipelist.RecipeListFragment"
         android:label="RecipeListFragment" >
         <action
             android:id="@+id/viewRecipe"
@@ -13,6 +13,6 @@
     </fragment>
     <fragment
         android:id="@+id/recipeFragment"
-        android:name="com.dev.abhinav.recipeapp.RecipeFragment"
+        android:name="com.dev.abhinav.recipeapp.presentation.ui.recipe.RecipeFragment"
         android:label="RecipeFragment" />
 </navigation>
