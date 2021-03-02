@@ -23,7 +23,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
 @Composable
-fun RecipeCard(recipe: Recipe, onClick: () -> Unit){
+fun RecipeCard(recipe: Recipe, onClick: () -> Unit) {
     Card(
             shape = MaterialTheme.shapes.small,
             modifier = Modifier
