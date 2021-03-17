@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.dev.abhinav.recipeapp.presentation.components.CircularIndeterminateProgressBar
 import com.dev.abhinav.recipeapp.presentation.components.RecipeCard
-import com.dev.abhinav.recipeapp.presentation.components.SearchAppBar
+//import com.dev.abhinav.recipeapp.presentation.components.SearchAppBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,15 +30,15 @@ class RecipeListFragment: Fragment() {
                 val loading = viewModel.loading.value
 
                 Column {
-                    SearchAppBar(
-                        query = query,
-                        onQueryChanged = viewModel::onQueryChanged,
-                        onExecuteSearch = viewModel::newSearch,
-                        scrollPosition = viewModel.categoryScrollPosition,
-                        selectedCategory = selectedCategory,
-                        onSelectedCategoryChanged = viewModel::onSelectedCategoryChanged,
-                        onChangeCategoryScrollPosition = viewModel::onChangeCategoryScrollPosition
-                    )
+//                    SearchAppBar(
+//                        query = query,
+//                        onQueryChanged = viewModel::onQueryChanged,
+//                        onExecuteSearch = viewModel::newSearch,
+//                        scrollPosition = viewModel.categoryScrollPosition,
+//                        selectedCategory = selectedCategory,
+//                        onSelectedCategoryChanged = viewModel::onSelectedCategoryChanged,
+//                        onChangeCategoryScrollPosition = viewModel::onChangeCategoryScrollPosition
+//                    )
 
                     Box(modifier = Modifier.fillMaxSize()) {
                         LazyColumn {

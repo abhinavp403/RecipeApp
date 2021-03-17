@@ -13,8 +13,9 @@ import javax.inject.Named
 
 class RecipeListViewModel
 
-@ViewModelInject
-constructor(private val repository: RecipeRepository, @Named("auth_token") val token: String): ViewModel() {
+//@ViewModelInject
+//constructor(private val repository: RecipeRepository, @Named("auth_token") val token: String): ViewModel() {
+constructor(): ViewModel() {
 
     val recipes: MutableState<List<Recipe>> = mutableStateOf(ArrayList())
 
@@ -35,12 +36,12 @@ constructor(private val repository: RecipeRepository, @Named("auth_token") val t
         //delay(2000)
         resetSearchState()
         viewModelScope.launch {
-            val result = repository.search(
-                    token = token,
-                    page = 1,
-                    query = query.value
-            )
-            recipes.value = result
+//            val result = repository.search(
+//                    token = token,
+//                    page = 1,
+//                    query = query.value
+//            )
+//            recipes.value = result
         }
         loading.value = false
     }

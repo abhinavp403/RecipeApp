@@ -20,72 +20,72 @@ import androidx.compose.ui.unit.dp
 import com.dev.abhinav.recipeapp.presentation.ui.recipelist.FoodCategory
 import com.dev.abhinav.recipeapp.presentation.ui.recipelist.getAllFoodCategories
 
-@Composable
-fun SearchAppBar(
-    query: String,
-    onQueryChanged: (String) -> Unit,
-    onExecuteSearch: () -> Unit,
-    scrollPosition: Float,
-    selectedCategory: FoodCategory?,
-    onSelectedCategoryChanged: (String) -> Unit,
-    onChangeCategoryScrollPosition: (Float) -> Unit
-) {
-    Surface(
-        modifier = Modifier.fillMaxWidth(),
-        color = Color.White,
-        elevation = 8.dp
-    ) {
-        Column {
-            Row(modifier = Modifier.fillMaxWidth()) {
-                TextField(
-                    modifier = Modifier
-                        .fillMaxWidth(0.9f)
-                        .padding(8.dp),
-                    value = query,
-                    onValueChange = {
-                        onQueryChanged(it)
-                    },
-                    label = {
-                        Text(text = "Search")
-                    },
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Text,
-                        imeAction = ImeAction.Search
-                    ),
-                    leadingIcon = {
-                        Icon(Icons.Filled.Search, contentDescription = "Search")
-                    },
-                    onImeActionPerformed = { action, softKeyboardController ->
-                        if (action == ImeAction.Search) {
-                            onExecuteSearch()
-                            softKeyboardController?.hideSoftwareKeyboard()
-                        }
-                    },
-                    textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
-                    backgroundColor = MaterialTheme.colors.primarySurface,
-                )
-            }
-
-            val scrollState = rememberScrollState()
-            ScrollableRow(
-                modifier = Modifier.padding(start = 8.dp, bottom = 8.dp),
-                scrollState = scrollState
-            ) {
-                scrollState.scrollTo(scrollPosition)
-                for (category in getAllFoodCategories()) {
-                    FoodCategoryChip(
-                        category = category.value,
-                        isSelected = selectedCategory == category,
-                        onSelectedCategoryChanged = {
-                            onSelectedCategoryChanged(it)
-                            onChangeCategoryScrollPosition(scrollState.value)
-                        },
-                        onExecuteSearch = {
-                            onExecuteSearch()
-                        }
-                    )
-                }
-            }
-        }
-    }
-}
+//@Composable
+//fun SearchAppBar(
+//    query: String,
+//    onQueryChanged: (String) -> Unit,
+//    onExecuteSearch: () -> Unit,
+//    scrollPosition: Float,
+//    selectedCategory: FoodCategory?,
+//    onSelectedCategoryChanged: (String) -> Unit,
+//    onChangeCategoryScrollPosition: (Float) -> Unit
+//) {
+//    Surface(
+//        modifier = Modifier.fillMaxWidth(),
+//        color = Color.White,
+//        elevation = 8.dp
+//    ) {
+//        Column {
+//            Row(modifier = Modifier.fillMaxWidth()) {
+//                TextField(
+//                    modifier = Modifier
+//                        .fillMaxWidth(0.9f)
+//                        .padding(8.dp),
+//                    value = query,
+//                    onValueChange = {
+//                        onQueryChanged(it)
+//                    },
+//                    label = {
+//                        Text(text = "Search")
+//                    },
+//                    keyboardOptions = KeyboardOptions(
+//                        keyboardType = KeyboardType.Text,
+//                        imeAction = ImeAction.Search
+//                    ),
+//                    leadingIcon = {
+//                        Icon(Icons.Filled.Search, contentDescription = "Search")
+//                    },
+//                    onImeActionPerformed = { action, softKeyboardController ->
+//                        if (action == ImeAction.Search) {
+//                            onExecuteSearch()
+//                            softKeyboardController?.hideSoftwareKeyboard()
+//                        }
+//                    },
+//                    textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
+//                    backgroundColor = MaterialTheme.colors.primarySurface,
+//                )
+//            }
+//
+//            val scrollState = rememberScrollState()
+//            ScrollableRow(
+//                modifier = Modifier.padding(start = 8.dp, bottom = 8.dp),
+//                scrollState = scrollState
+//            ) {
+//                //scrollState.scrollTo(scrollPosition)
+//                for (category in getAllFoodCategories()) {
+////                    FoodCategoryChip(
+////                        category = category.value,
+////                        isSelected = selectedCategory == category,
+////                        onSelectedCategoryChanged = {
+////                            onSelectedCategoryChanged(it)
+////                            onChangeCategoryScrollPosition(scrollState.value)
+////                        },
+////                        onExecuteSearch = {
+////                            onExecuteSearch()
+////                        }
+////                    )
+//                }
+//            }
+//        }
+//    }
+//}
