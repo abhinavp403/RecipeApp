@@ -20,42 +20,42 @@ package com.dev.abhinav.recipeapp.presentation.components
 //
 //@Composable
 //fun PulsingDemo(){
-//    val color = MaterialTheme.colors.primary
+////    val color = MaterialTheme.colors.primary
+////
+////    val pulseAnim = transition(
+////        definition = pulseDefinition,
+////        initState = INITIAL,
+////        toState = FINAL
+////    )
+////
+////    val pulseMagnitude = pulseAnim[pulsePropKey]
 //
-//    val pulseAnim = transition(
-//        definition = pulseDefinition,
-//        initState = INITIAL,
-//        toState = FINAL
-//    )
-//
-//    val pulseMagnitude = pulseAnim[pulsePropKey]
-//
-//    Row(
-//        modifier = Modifier
-//            .fillMaxWidth()
-//            .height(55.dp),
-//        horizontalArrangement = Arrangement.Center
-//    ){
-//        Image(
-//            modifier = Modifier
-//                .align(Alignment.CenterVertically)
-//                .height(pulseMagnitude.dp)
-//                .width(pulseMagnitude.dp)
-//            ,
-//            imageVector = Icons.Default.Favorite,
-//            contentDescription = ""
-//        )
-//    }
-//
-//
-//    Canvas(
-//        modifier = Modifier.fillMaxWidth().height(55.dp),
-//    ) {
-//        drawCircle(
-//            radius = pulseMagnitude,
-//            brush = SolidColor(color),
-//        )
-//    }
+////    Row(
+////        modifier = Modifier
+////            .fillMaxWidth()
+////            .height(55.dp),
+////        horizontalArrangement = Arrangement.Center
+////    ){
+////        Image(
+////            modifier = Modifier
+////                .align(Alignment.CenterVertically)
+////                .height(10.dp)
+////                .width(10.dp)
+////            ,
+////            imageVector = Icons.Default.Favorite,
+////            contentDescription = "pulse demo"
+////        )
+////    }
+////
+////
+////    Canvas(
+////        modifier = Modifier.fillMaxWidth().height(55.dp),
+////    ) {
+////        drawCircle(
+////            radius = pulseMagnitude,
+////            brush = SolidColor(color),
+////        )
+////    }
 //}
 //
 //
