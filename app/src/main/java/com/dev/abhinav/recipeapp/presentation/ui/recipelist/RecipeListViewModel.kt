@@ -18,7 +18,6 @@ constructor(
     private val repository: RecipeRepository,
     private @Named("auth_token") val token: String
 ): ViewModel() {
-//constructor(): ViewModel() {
 
     val recipes: MutableState<List<Recipe>> = mutableStateOf(ArrayList())
 

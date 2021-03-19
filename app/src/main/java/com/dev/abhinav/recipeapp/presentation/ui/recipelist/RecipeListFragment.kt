@@ -8,22 +8,24 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.dev.abhinav.recipeapp.presentation.BaseApplication
-import com.dev.abhinav.recipeapp.presentation.components.CircularIndeterminateProgressBar
-import com.dev.abhinav.recipeapp.presentation.components.LoadingRecipeListShimmer
-import com.dev.abhinav.recipeapp.presentation.components.RecipeCard
+import com.dev.abhinav.recipeapp.presentation.components.*
+import com.dev.abhinav.recipeapp.presentation.components.util.SnackbarController
 import com.dev.abhinav.recipeapp.presentation.theme.AppTheme
-//import com.dev.abhinav.recipeapp.presentation.components.SearchAppBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@ExperimentalMaterialApi
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class RecipeListFragment: Fragment() {
@@ -31,8 +33,11 @@ class RecipeListFragment: Fragment() {
     @Inject
     lateinit var application: BaseApplication
 
+    private val snackbarController = SnackbarController(lifecycleScope)
+
     private val viewModel: RecipeListViewModel by viewModels()
 
+    @ExperimentalMaterialApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return ComposeView(requireContext()).apply {
             setContent {
@@ -43,23 +48,41 @@ class RecipeListFragment: Fragment() {
                     val selectedCategory = viewModel.selectedCategory.value
                     val categoryScrollPosition = viewModel.categoryScrollPosition
                     val loading = viewModel.loading.value
+                    val scaffoldState = rememberScaffoldState()
 
-                    Column(modifier = Modifier.background(color = MaterialTheme.colors.primary)) {
-//                      SearchAppBar(
-//                            query = query,
-//                            onQueryChanged = viewModel::onQueryChanged,
-//                            onExecuteSearch = viewModel::newSearch,
-//                            categories = getAllFoodCategories(),
-//                            selectedCategory = selectedCategory,
-//                            onSelectedCategoryChanged = viewModel::onSelectedCategoryChanged,
-//                            scrollPosition = categoryScrollPosition,
-//                            onChangeScrollPosition = viewModel::onChangeCategoryScrollPosition,
-//                            onToggleTheme = {
-//                                application.toggleLightTheme()
-//                            }
-//                    )
-
-                        Box(modifier = Modifier.fillMaxSize()) {
+                    Scaffold(
+                        topBar = {
+                            SearchAppBar(
+                                query = query,
+                                onQueryChanged = viewModel::onQueryChanged,
+                                onExecuteSearch = {
+                                    if (viewModel.selectedCategory.value?.value == "Milk"){
+                                        snackbarController.getScope().launch {
+                                            snackbarController.showSnackbar(
+                                                scaffoldState = scaffoldState,
+                                                message = "Invalid category: MILK",
+                                                actionLabel = "Hide"
+                                            )
+                                        }
+                                    }
+                                    else{
+                                        viewModel.newSearch()
+                                    }
+                                },
+                                categories = getAllFoodCategories(),
+                                selectedCategory = selectedCategory,
+                                onSelectedCategoryChanged = viewModel::onSelectedCategoryChanged,
+                                scrollPosition = categoryScrollPosition,
+                                onChangeScrollPosition = viewModel::onChangeCategoryScrollPosition,
+                                onToggleTheme = application::toggleLightTheme
+                            )
+                        },
+                        scaffoldState = scaffoldState,
+                        snackbarHost = {
+                            scaffoldState.snackbarHostState
+                        }
+                    ) {
+                        Box(modifier = Modifier.background(color = MaterialTheme.colors.surface)) {
                             if (loading) {
                                 LoadingRecipeListShimmer(imageHeight = 250.dp)
                             } else {
@@ -71,9 +94,13 @@ class RecipeListFragment: Fragment() {
                                     }
                                 }
                             }
-                            CircularIndeterminateProgressBar(
-                                isDisplayed = loading,
-                                verticalBias = 0.3f
+                            CircularIndeterminateProgressBar(isDisplayed = loading, verticalBias = 0.3f)
+                            DefaultSnackbar(
+                                snackbarHostState = scaffoldState.snackbarHostState,
+                                onDismiss = {
+                                    scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
+                                },
+                                modifier = Modifier.align(Alignment.BottomCenter)
                             )
                         }
                     }

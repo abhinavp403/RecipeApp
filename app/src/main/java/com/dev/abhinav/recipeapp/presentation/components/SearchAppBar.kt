@@ -16,6 +16,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.dev.abhinav.recipeapp.presentation.ui.recipelist.FoodCategory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun SearchAppBar(
@@ -26,7 +29,7 @@ fun SearchAppBar(
     selectedCategory: FoodCategory?,
     onSelectedCategoryChanged: (String) -> Unit,
     scrollPosition: Float,
-    onChangeCategoryScrollPosition: (Float) -> Unit,
+    onChangeScrollPosition: (Float) -> Unit,
     onToggleTheme: () -> Unit
 ) {
     Surface(
@@ -35,48 +38,48 @@ fun SearchAppBar(
         elevation = 8.dp
     ) {
         Column {
-//            Row(modifier = Modifier.fillMaxWidth()) {
-//                TextField(
-//                    modifier = Modifier
-//                        .fillMaxWidth(0.9f)
-//                        .padding(8.dp),
-//                    value = query,
-//                    onValueChange = {
-//                        onQueryChanged(it)
-//                    },
-//                    label = {
-//                        Text(text = "Search")
-//                    },
-//                    keyboardOptions = KeyboardOptions(
-//                        keyboardType = KeyboardType.Text,
-//                        imeAction = ImeAction.Done
-//                    ),
-//                    leadingIcon = {
-//                        Icon(Icons.Filled.Search, contentDescription = "Search")
-//                    },
-//                    onImeActionPerformed = { action, softKeyboardController ->
-//                        if (action == ImeAction.Done) {
-//                            onExecuteSearch()
-//                            softKeyboardController?.hideSoftwareKeyboard()
-//                        }
-//                    },
-//                    textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
-//                    backgroundColor = MaterialTheme.colors.surface
-//                )
-//            }
-            ConstraintLayout(
-                //modifier = Modifier.align(Alignment.CenterVertically)
-            ) {
-                val (menu) = createRefs()
-                IconButton(
+            Row(modifier = Modifier.fillMaxWidth()) {
+                TextField(
                     modifier = Modifier
-                        .constrainAs(menu) {
-                            end.linkTo(parent.end)
-                            linkTo(top = parent.top, bottom = parent.bottom)
-                        },
-                    onClick = onToggleTheme
-                ){
-                    Icon(Icons.Filled.MoreVert, contentDescription = "Icon Button MoreVert")
+                        .fillMaxWidth(0.9f)
+                        .padding(8.dp),
+                    value = query,
+                    onValueChange = {
+                        onQueryChanged(it)
+                    },
+                    label = {
+                        Text(text = "Search")
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Done
+                    ),
+                    leadingIcon = {
+                        Icon(Icons.Filled.Search, contentDescription = "Search")
+                    },
+                    onImeActionPerformed = { action, softKeyboardController ->
+                        if (action == ImeAction.Done) {
+                            onExecuteSearch()
+                            softKeyboardController?.hideSoftwareKeyboard()
+                        }
+                    },
+                    textStyle = TextStyle(color = MaterialTheme.colors.onSurface),
+                    backgroundColor = MaterialTheme.colors.surface
+                )
+                ConstraintLayout(
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                ) {
+                    val (menu) = createRefs()
+                    IconButton(
+                        modifier = Modifier
+                            .constrainAs(menu) {
+                                end.linkTo(parent.end)
+                                linkTo(top = parent.top, bottom = parent.bottom)
+                            },
+                        onClick = onToggleTheme
+                    ) {
+                        Icon(Icons.Filled.MoreVert, contentDescription = "Icon Button MoreVert")
+                    }
                 }
             }
             val scrollState = rememberScrollState()
@@ -84,14 +87,16 @@ fun SearchAppBar(
                 modifier = Modifier.padding(start = 8.dp, bottom = 8.dp),
                 scrollState = scrollState
             ) {
-                //scrollState.scrollTo(scrollPosition)
+                GlobalScope.launch (Dispatchers.Main) {
+                    scrollState.scrollTo(scrollPosition)
+                }
                 for (category in categories) {
                     FoodCategoryChip(
                         category = category.value,
                         isSelected = selectedCategory == category,
                         onSelectedCategoryChanged = {
+                            onChangeScrollPosition(scrollState.value)
                             onSelectedCategoryChanged(it)
-                            onChangeCategoryScrollPosition(scrollState.value)
                         },
                         onExecuteSearch = {
                             onExecuteSearch()
