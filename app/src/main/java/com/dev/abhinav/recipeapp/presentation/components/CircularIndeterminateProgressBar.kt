@@ -9,11 +9,9 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun CircularIndeterminateProgressBar(isDisplayed: Boolean, verticalBias: Float) {
-    if(isDisplayed){
-        ConstraintLayout(
-            modifier = Modifier.fillMaxSize(),
-        ){
-            val (progressBar, text) = createRefs()
+    if(isDisplayed) {
+        ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+            val (progressBar) = createRefs()
             val topBias = createGuidelineFromTop(verticalBias)
             CircularProgressIndicator(
                 modifier = Modifier.constrainAs(progressBar) {

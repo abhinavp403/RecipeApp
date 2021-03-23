@@ -17,9 +17,9 @@ import com.dev.abhinav.recipeapp.presentation.components.util.ShimmerAnimationDe
 
 @Composable
 fun LoadingRecipeListShimmer(
-        imageHeight: Dp,
-        padding: Dp = 16.dp
-){
+    imageHeight: Dp,
+    padding: Dp = 16.dp
+) {
     WithConstraints(
             modifier = Modifier.fillMaxSize()
     ) {
@@ -28,21 +28,21 @@ fun LoadingRecipeListShimmer(
 
         val cardAnimationDefinition = remember{
             ShimmerAnimationDefinitions(
-                    widthPx = cardWidthPx,
-                    heightPx = cardHeightPx,
+                widthPx = cardWidthPx,
+                heightPx = cardHeightPx,
             )
         }
 
         val cardShimmerTranslateAnim = transition(
-                definition = cardAnimationDefinition.shimmerTranslateAnimation,
-                initState = START,
-                toState = END
+            definition = cardAnimationDefinition.shimmerTranslateAnimation,
+            initState = START,
+            toState = END
         )
 
         val colors = listOf(
-                Color.LightGray.copy(alpha = .9f),
-                Color.LightGray.copy(alpha = .3f),
-                Color.LightGray.copy(alpha = .9f),
+            Color.LightGray.copy(alpha = .9f),
+            Color.LightGray.copy(alpha = .3f),
+            Color.LightGray.copy(alpha = .9f),
         )
         val xCardShimmer = cardShimmerTranslateAnim[cardAnimationDefinition.xShimmerPropKey]
         val yCardShimmer = cardShimmerTranslateAnim[cardAnimationDefinition.yShimmerPropKey]
@@ -50,12 +50,12 @@ fun LoadingRecipeListShimmer(
         ScrollableColumn {
             repeat(5){
                 ShimmerRecipeCardItem(
-                        colors = colors,
-                        xShimmer = xCardShimmer,
-                        yShimmer = yCardShimmer,
-                        cardHeight = imageHeight,
-                        gradientWidth = cardAnimationDefinition.gradientWidth,
-                        padding = padding
+                    colors = colors,
+                    xShimmer = xCardShimmer,
+                    yShimmer = yCardShimmer,
+                    cardHeight = imageHeight,
+                    gradientWidth = cardAnimationDefinition.gradientWidth,
+                    padding = padding
                 )
             }
         }

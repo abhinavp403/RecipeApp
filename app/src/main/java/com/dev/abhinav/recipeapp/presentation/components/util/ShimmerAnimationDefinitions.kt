@@ -1,13 +1,12 @@
 package com.dev.abhinav.recipeapp.presentation.components.util
 
 import androidx.compose.animation.core.*
-import kotlin.math.tan
 
 class ShimmerAnimationDefinitions(
-        private val widthPx: Float,
-        private val heightPx: Float,
-        private val animationDuration: Int = 1300,
-        private val animationDelay: Int = 300
+    private val widthPx: Float,
+    private val heightPx: Float,
+    private val animationDuration: Int = 1300,
+    private val animationDelay: Int = 300
 ) {
     var gradientWidth: Float = (0.2f * heightPx)
 
@@ -30,20 +29,20 @@ class ShimmerAnimationDefinitions(
 
         transition(AnimationState.START, AnimationState.END) {
             xShimmerPropKey using infiniteRepeatable(
-                    animation = tween(
-                            durationMillis = animationDuration,
-                            easing = LinearEasing,
-                            delayMillis = animationDelay
-                    ),
-                    repeatMode = RepeatMode.Restart
+                animation = tween(
+                    durationMillis = animationDuration,
+                    easing = LinearEasing,
+                    delayMillis = animationDelay
+                ),
+                repeatMode = RepeatMode.Restart
             )
             yShimmerPropKey using infiniteRepeatable(
-                    animation = tween(
-                            durationMillis = animationDuration,
-                            easing = LinearEasing,
-                            delayMillis = animationDelay
-                    ),
-                    repeatMode = RepeatMode.Restart
+                animation = tween(
+                    durationMillis = animationDuration,
+                    easing = LinearEasing,
+                    delayMillis = animationDelay
+                ),
+                repeatMode = RepeatMode.Restart
             )
         }
     }

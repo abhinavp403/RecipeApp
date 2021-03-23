@@ -20,11 +20,11 @@ fun FoodCategoryChip(category: String, isSelected: Boolean = false, onSelectedCa
         color = if(isSelected) Color.LightGray else MaterialTheme.colors.primary
     ) {
         Row(modifier = Modifier.toggleable(
-                                value = isSelected,
-                                onValueChange = {
-                                    onSelectedCategoryChanged(category)
-                                    onExecuteSearch()
-                                })
+            value = isSelected,
+            onValueChange = {
+                onSelectedCategoryChanged(category)
+                onExecuteSearch()
+            })
         ) {
             Text(
                 text = category,
