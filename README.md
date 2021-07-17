@@ -12,7 +12,7 @@ Architecture is MVVM (RecipeListEvent uses MVI)
 
 Libraries Used-
 1) JetPack Compose
-2) Retfrofit
+2) Retrofit
 3) REST APIs
 4) Navigation Components
 5) Hilt Injection
